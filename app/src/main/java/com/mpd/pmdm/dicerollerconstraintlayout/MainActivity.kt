@@ -11,23 +11,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //Código añadido
-        val rollButton: Button = findViewById(R.id.btnRoll);
-        rollButton.setOnClickListener { rollDice() }
+        //Creo aquí los dos dados, y se los paso a la función
+        val dice1 = Dice(6)
+        val dice2 = Dice(6)
 
-        //Mostramos una cara aleatoria cuando la aplicación arranca
-        rollDice()
+        //Apunto desde aquí a los dos ImageView
+        val dice1Image:ImageView = findViewById(R.id.ivDice1)
+        val dice2Image:ImageView = findViewById(R.id.ivDice2)
+
+        //Le paso a la función el objeto dado, y la imagen de la UI correspondiente a actualizar
+        //cuando carga la aplicación
+        rollDice(dice1, dice1Image)
+        rollDice(dice2, dice2Image)
+
+        //asignamos el mismo comportamiento en el onClick
+        val rollButton: Button = findViewById(R.id.btnRoll);
+        rollButton.setOnClickListener {
+            rollDice(dice1, dice1Image);
+            rollDice(dice2, dice2Image);
+        }
     }
+
 
     /**
      * Función que crea un dado, lo tira, y muestra su valor en la IU
      */
-    private fun rollDice() {
-        //Creamos el dado con 6 caras
-        val dice = Dice(6)
+    private fun rollDice(dice: Dice, imageViewDice: ImageView) {
         val diceValue = dice.roll()
 
-        //Apuntamos con una variable inmutable al ImageView con la imagen del dado
-        val diceImage:ImageView = findViewById(R.id.ivDice)
 
         val imgDiceResource = when(diceValue){
             1 -> R.drawable.dice_1
@@ -40,9 +51,9 @@ class MainActivity : AppCompatActivity() {
             else -> R.drawable.dice_6
         }
 
-        diceImage.setImageResource(imgDiceResource)
+        imageViewDice.setImageResource(imgDiceResource)
         //Le damos una descripción a la imagen para aportar accesibilidad
-        diceImage.contentDescription = diceValue.toString()
+        imageViewDice.contentDescription = diceValue.toString()
     }
 }
 

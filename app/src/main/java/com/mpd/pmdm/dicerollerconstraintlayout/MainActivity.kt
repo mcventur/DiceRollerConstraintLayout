@@ -2,7 +2,7 @@ package com.mpd.pmdm.dicerollerconstraintlayout
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -21,10 +21,25 @@ class MainActivity : AppCompatActivity() {
     private fun rollDice() {
         //Creamos el dado con 6 caras
         val dice = Dice(6)
+        val diceValue = dice.roll()
 
-        //Apuntamos con una variable inmutable al textView que mostrará el valor
-        val resultTextView: TextView = findViewById(R.id.tvDiceValue)
-        resultTextView.text = dice.roll().toString()
+        //Apuntamos con una variable inmutable al ImageView con la imagen del dado
+        val diceImage:ImageView = findViewById(R.id.ivDice)
+
+        val imgDiceResource = when(diceValue){
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            6 -> R.drawable.dice_6
+            //Esto no se debería dar, pero me obliga al usar when como expresión
+            else -> R.drawable.dice_6
+        }
+
+        diceImage.setImageResource(imgDiceResource)
+        //Le damos una descripción a la imagen para aportar accesibilidad
+        diceImage.contentDescription = diceValue.toString()
     }
 }
 

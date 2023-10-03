@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity() {
         //Código añadido
         val rollButton: Button = findViewById(R.id.btnRoll);
         rollButton.setOnClickListener { rollDice() }
+
+        //Mostramos una cara aleatoria cuando la aplicación arranca
+        rollDice()
     }
 
     /**

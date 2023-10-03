@@ -49,6 +49,15 @@ class MainActivity : AppCompatActivity() {
 /**
  * Clase que modela un dado con un número de caras configurable
  */
+
+/*
+De la documentación oficial de Kotlin:
+https://kotlinlang.org/docs/coding-conventions.html#source-file-organization
+Se recomienda colocar múltiples declaraciones (clases, funciones de nivel superior o propiedades)
+en el mismo archivo fuente de Kotlin siempre que estas declaraciones estén estrechamente
+relacionadas semánticamente entre sí y el tamaño del archivo siga siendo razonable
+(sin exceder unos pocos cientos de líneas).
+ */
 class Dice(private val numSides: Int) {
     fun roll(): Int {
         return (1..numSides).random()

@@ -10,38 +10,37 @@
         android:id="@+id/btnRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/roll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDice1" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
-    <!-- una opcion para centrar los elementos horizontalmente: constraint_horizontal_bias:
+    <!-- otra opcion para centrar los dados horizontalmente:
+           meterlos en un lineaLayout horizontal, con gravity center -->
 
-        Si los elementos tuvieran tamaño variable (ej: wrap_content), podrían montarse
-
-        Al primer dado le damos 0.15 de bias horizontal, al segundo 0.85 -->
-    <ImageView
-        android:id="@+id/ivDice1"
-        android:layout_width="160dp"
-        android:layout_height="200dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/dice_1" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/ivDice2"
-        android:layout_width="160dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dice_1" />
+        <ImageView
+            android:id="@+id/ivDice1"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            tools:srcCompat="@drawable/dice_1" />
+
+        <ImageView
+            android:id="@+id/ivDice2"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/dice_1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

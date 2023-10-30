@@ -6,52 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <!--
+        Centramos los dados usando chains
+        Más info: https://developer.android.com/develop/ui/views/layout/constraint-layout#constrain-chain
+    -->
+
     <Button
         android:id="@+id/btnRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/roll"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/ivDice1" />
 
-
-    <!-- otra opcion para centrar los dados horizontalmente:
-           meterlos en un lineaLayout horizontal, con gravity center
-
-           En este caso, uso layout_weight y layout_gravity en las imágenes
-           para indicar cómo deben situarse y repartirse el espacio disponible.
-           Con el mismo weight => 50% de espacio cada imagen
-           Así conseguimos que se disribuyan por el horizontal_layout, en lugar de estar
-           pegadas en el centro
-            -->
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ImageView
+        android:id="@+id/ivDice1"
+        android:layout_width="190dp"
         android:layout_height="200dp"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivDice2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/dice_1" />
 
-        <ImageView
-            android:id="@+id/ivDice1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            tools:srcCompat="@drawable/dice_1" />
+    <ImageView
+        android:id="@+id/ivDice2"
+        android:layout_width="190dp"
+        android:layout_height="200dp"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivDice1"
+        app:layout_constraintTop_toTopOf="@+id/ivDice1"
+        app:srcCompat="@drawable/dice_1" />
 
-        <ImageView
-            android:id="@+id/ivDice2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/dice_1" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

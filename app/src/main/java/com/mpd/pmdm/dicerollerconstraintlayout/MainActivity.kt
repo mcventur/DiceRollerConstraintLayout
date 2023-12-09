@@ -1,76 +1,46 @@
 package com.mpd.pmdm.dicerollerconstraintlayout
 
 import android.os.Bundle
-import android.widget.Button
+import android.util.Log
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.mpd.pmdm.dicerollerconstraintlayout.databinding.ActivityMainBinding
+import com.mpd.pmdm.dicerollerconstraintlayout.viewmodel.TwoDicesViewModel
 
 class MainActivity : AppCompatActivity() {
+    private val dices: TwoDicesViewModel by viewModels{TwoDicesViewModel.DiceViewModelFactory(6)}
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        //Código añadido
-        //Creo aquí los dos dados, y se los paso a la función
-        val dice1 = Dice(6)
-        val dice2 = Dice(6)
+        Log.d("MainActivity", "Caras dados creado: ${dices.caraDice1} , ${dices.caraDice2}")
+        updateDicesImages()
 
-        //Apunto desde aquí a los dos ImageView
-        val dice1Image:ImageView = findViewById(R.id.ivDice1)
-        val dice2Image:ImageView = findViewById(R.id.ivDice2)
-
-        //Le paso a la función el objeto dado, y la imagen de la UI correspondiente a actualizar
-        //cuando carga la aplicación
-        rollDice(dice1, dice1Image)
-        rollDice(dice2, dice2Image)
-
-        //asignamos el mismo comportamiento en el onClick
-        val rollButton: Button = findViewById(R.id.btnRoll);
-        rollButton.setOnClickListener {
-            rollDice(dice1, dice1Image);
-            rollDice(dice2, dice2Image);
+        binding.btnRoll.setOnClickListener {
+            dices.roll()
+            updateDicesImages()
         }
     }
 
-
-    /**
-     * Función que crea un dado, lo tira, y muestra su valor en la IU
-     */
-    private fun rollDice(dice: Dice, imageViewDice: ImageView) {
-        val diceValue = dice.roll()
-
-
-        val imgDiceResource = when(diceValue){
-            1 -> R.drawable.dice_1
-            2 -> R.drawable.dice_2
-            3 -> R.drawable.dice_3
-            4 -> R.drawable.dice_4
-            5 -> R.drawable.dice_5
-            6 -> R.drawable.dice_6
-            //Esto no se debería dar, pero me obliga al usar when como expresión
-            else -> R.drawable.dice_6
-        }
-
-        imageViewDice.setImageResource(imgDiceResource)
-        //Le damos una descripción a la imagen para aportar accesibilidad
-        imageViewDice.contentDescription = diceValue.toString()
+    private fun updateDicesImages() {
+        updateOneDiceImage(binding.ivDice1, dices.caraDice1)
+        updateOneDiceImage(binding.ivDice2, dices.caraDice2)
     }
-}
 
-/**
- * Clase que modela un dado con un número de caras configurable
- */
-
-/*
-De la documentación oficial de Kotlin:
-https://kotlinlang.org/docs/coding-conventions.html#source-file-organization
-Se recomienda colocar múltiples declaraciones (clases, funciones de nivel superior o propiedades)
-en el mismo archivo fuente de Kotlin siempre que estas declaraciones estén estrechamente
-relacionadas semánticamente entre sí y el tamaño del archivo siga siendo razonable
-(sin exceder unos pocos cientos de líneas).
- */
-class Dice(private val numSides: Int) {
-    fun roll(): Int {
-        return (1..numSides).random()
+    private fun updateOneDiceImage(ivDice: ImageView, cara: Int) {
+        ivDice.setImageResource(
+            when(cara){
+                1 -> R.drawable.dice_1
+                2 -> R.drawable.dice_2
+                3 -> R.drawable.dice_3
+                4 -> R.drawable.dice_4
+                5 -> R.drawable.dice_5
+                else -> R.drawable.dice_6
+            }
+        )
     }
 }

@@ -22,13 +22,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnRoll.setOnClickListener {
             dices.roll()
-            updateDicesImages()
+            //Ya no sería necesario llamar manualmente a la función de actualización con LiveData
+            //updateDicesImages()
         }
     }
 
     private fun updateDicesImages() {
-        updateOneDiceImage(binding.ivDice1, dices.caraDice1)
-        updateOneDiceImage(binding.ivDice2, dices.caraDice2)
+        dices.caraDice1.observe(this){
+            updateOneDiceImage(binding.ivDice1, it)
+        }
+
+        dices.caraDice2.observe(this){
+            updateOneDiceImage(binding.ivDice2, it)
+        }
     }
 
     private fun updateOneDiceImage(ivDice: ImageView, cara: Int) {

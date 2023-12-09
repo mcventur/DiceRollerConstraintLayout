@@ -1,6 +1,8 @@
 package com.mpd.pmdm.dicerollerconstraintlayout.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mpd.pmdm.dicerollerconstraintlayout.model.Dice
@@ -8,8 +10,12 @@ import com.mpd.pmdm.dicerollerconstraintlayout.model.Dice
 class TwoDicesViewModel(carasDados: Int) : ViewModel() {
     private val dice1 = Dice(carasDados)
     private val dice2 = Dice(carasDados)
-    val caraDice1 get() = dice1.caraActual
-    val caraDice2 get() = dice2.caraActual
+
+    private val _caraDice1 = MutableLiveData<Int>(dice1.caraActual)
+    val caraDice1: LiveData<Int> = _caraDice1
+
+    private val _caraDice2 = MutableLiveData<Int>(dice2.caraActual)
+    val caraDice2: LiveData<Int> = _caraDice2
 
     init {
         Log.d(TAG, "Inicializando ViewModel con dados: $dice1 y $dice2")
@@ -29,7 +35,9 @@ class TwoDicesViewModel(carasDados: Int) : ViewModel() {
 
     fun roll() {
         dice1.roll()
+        _caraDice1.postValue(dice1.caraActual)
         dice2.roll()
+        _caraDice2.postValue(dice2.caraActual)
     }
 
     override fun onCleared() {

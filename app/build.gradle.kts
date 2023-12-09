@@ -42,12 +42,15 @@ android {
 dependencies {
     val lifecycle_version = "2.6.2"
     val activity_version = "1.6.1"
+    val fragment_version = "1.6.2"
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     //Para poder usar delegado  by viewModels() en Actividades
     implementation("androidx.activity:activity-ktx:$activity_version")
+    // Idem en fragmentos
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
 
     implementation("androidx.core:core-ktx:1.12.0")

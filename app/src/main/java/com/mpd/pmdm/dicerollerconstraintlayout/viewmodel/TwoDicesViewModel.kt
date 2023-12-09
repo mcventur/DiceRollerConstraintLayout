@@ -35,9 +35,9 @@ class TwoDicesViewModel(carasDados: Int) : ViewModel() {
 
     fun roll() {
         dice1.roll()
-        _caraDice1.postValue(dice1.caraActual)
+        _caraDice1.value = dice1.caraActual
         dice2.roll()
-        _caraDice2.postValue(dice2.caraActual)
+        _caraDice2.value = dice2.caraActual
     }
 
     override fun onCleared() {

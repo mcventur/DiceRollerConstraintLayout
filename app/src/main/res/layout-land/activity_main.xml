@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <fragment
         android:id="@+id/dadosFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="4"
         android:name="com.mpd.pmdm.dicerollerconstraintlayout.DadosFragment"
         tools:layout="@layout/fragment_dados"/>
 
     <fragment
         android:id="@+id/botonFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:name="com.mpd.pmdm.dicerollerconstraintlayout.BotonFragment"
         tools:layout="@layout/fragment_boton"/>

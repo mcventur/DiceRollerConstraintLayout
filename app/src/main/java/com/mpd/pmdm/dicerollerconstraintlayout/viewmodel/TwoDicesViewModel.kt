@@ -12,7 +12,7 @@ class TwoDicesViewModel(carasDados: Int) : ViewModel() {
     val caraDice2 get() = dice2.caraActual
 
     init {
-        Log.d("DiceViewModel", "Inicializando ViewModel con $dice1")
+        Log.d(TAG, "Inicializando ViewModel con dados: $dice1 y $dice2")
     }
 
     //Necesitamios un ViewModelProvider.Factory si queremos instanciar nuestro ViewModel recibiendo argumentos
@@ -30,6 +30,16 @@ class TwoDicesViewModel(carasDados: Int) : ViewModel() {
     fun roll() {
         dice1.roll()
         dice2.roll()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d(TAG, "Borrando el ViewModel")
+    }
+
+
+    companion object{
+        private const val TAG = "TwoDicesViewModel"
     }
 
 }
